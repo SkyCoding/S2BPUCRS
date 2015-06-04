@@ -41,6 +41,32 @@
         <asp:TextBox ID="txtDescricao" runat="server" Visible="false"></asp:TextBox>
         <ajaxToolkit:HtmlEditorExtender TargetControlID="txtDescricao" ID="HtmlEditorExtender1" runat="server"></ajaxToolkit:HtmlEditorExtender>
     </div>
+    
+    
+     <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+        <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtSlider" runat="server" Width="140px"></asp:TextBox>
+        <ajaxToolkit:MultiHandleSliderExtender ID="multiHandleSliderExtenderOne" runat="server"
+            TargetControlID="txtSlider" BehaviorID="multiHandleSliderOne" Minimum="-100"
+            Maximum="100" Steps="5" Length="100" TooltipText="{0}">
+            <MultiHandleSliderTargets>
+                
+                <ajaxToolkit:MultiHandleSliderTarget ControlID="TextBox1" />
+            
+                <ajaxToolkit:MultiHandleSliderTarget ControlID="TextBox2" />
 
+            </MultiHandleSliderTargets>
+        </ajaxToolkit:MultiHandleSliderExtender>
+
+
+
+    <div class="row jumbotron">
+        <div class="col-lg-12">
+            <asp:UpdatePanel ID="UpdatePanel1" runat="server"></asp:UpdatePanel>
+            <asp:PlaceHolder ID="phDescricao" runat="server"></asp:PlaceHolder>
+        </div>
+    </div>
+
+   
 
 </asp:Content>

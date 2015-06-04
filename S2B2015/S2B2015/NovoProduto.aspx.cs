@@ -19,11 +19,11 @@ namespace S2B2015
 
         void ShowData()
         {
-            StoreEntities _db = new StoreEntities();
+            S2BStoreEntities _db = new S2BStoreEntities();
             FillData(_db);
         }
 
-        private void FillData(StoreEntities db)
+        private void FillData(S2BStoreEntities db)
         {
             var Query = from c in db.Categorias
                         select new
@@ -55,7 +55,7 @@ namespace S2B2015
 
         protected void btnSalvar_Click(object sender, EventArgs e)
         {
-            StoreEntities _db = new StoreEntities();
+            S2BStoreEntities _db = new S2BStoreEntities();
 
             Produto oProduto = new Produto();
 

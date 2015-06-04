@@ -31,12 +31,19 @@ namespace S2B2015
             }
             else
             {
-                StoreEntities _db = new StoreEntities();
+                S2BStoreEntities _db = new S2BStoreEntities();
                 Produto query = (Produto)(from a in _db.Produtos
                                 where a.ProdutoId == id
                                 select a).FirstOrDefault();
 
-                
+                string sFiltro = "Kit";
+
+                var oProd = (from a in _db.Produtos
+                             where a.strTitulo.Contains(@"/" + sFiltro + "/")
+                                select a);//).FirstOrDefault();
+
+                List<Produto> llll = oProd.ToList();
+
 
                 if (query != null)
                 {
@@ -53,27 +60,28 @@ namespace S2B2015
 
 
                     String myEncodedString;
-                    // Encode the string.
-                    myEncodedString = HttpUtility.HtmlEncode(query.strDescrição);
+
+                    //myEncodedString = HttpUtility.HtmlEncode(query.strDescrição);
 
                     myEncodedString = HttpUtility.HtmlDecode(query.strDescrição);
 
-                    System.IO.StringWriter myWriter = new System.IO.StringWriter();
+                    //System.IO.StringWriter myWriter = new System.IO.StringWriter();
 
-                    HttpUtility.HtmlDecode(myEncodedString, myWriter);
+                    //HttpUtility.HtmlDecode(myEncodedString, myWriter);
                     
                     HtmlGenericControl divControl = new HtmlGenericControl("div");
-                    
 
-                    divControl.Attributes.Add("id", "asssw");
-                    divControl.Attributes.Add("innerHtml", "bob");
+
+                    divControl.Attributes.Add("id", "divDescricao");
+                    divControl.Attributes.Add("class", "col-md-9");
+                    //divControl.Attributes.Add("innerHtml", "bob");
                     divControl.InnerHtml = myEncodedString;
                     divControl.Visible = true;
-                    this.Controls.Add(divControl);
+                    phDescricao.Controls.Add(divControl);
 
 
                     //txtDescricao.Text = query.strDescrição;
-                    txtDescricao.Text = Server.HtmlDecode(myEncodedString);
+                    //txtDescricao.Text = Server.HtmlDecode(myEncodedString);
 
 
                 }
@@ -90,7 +98,7 @@ namespace S2B2015
 
         }
 
-        void Load_Data(StoreEntities db)
+        void Load_Data(S2BStoreEntities db)
         {
 
 

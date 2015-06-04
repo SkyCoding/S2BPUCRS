@@ -24,6 +24,29 @@ namespace S2B2015.Account
                 //string callbackUrl = IdentityHelper.GetUserConfirmationRedirectUrl(code, user.Id, Request);
                 //manager.SendEmail(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>.");
 
+                S2BStoreEntities _db = new S2BStoreEntities();
+
+                Usuario oUsuario= new Usuario();
+
+                oUsuario.strEmail = Email.Text;
+
+                oUsuario.strNome = Nome.Text;
+
+                oUsuario.strSenha = Password.Text;
+
+                try
+                {
+
+                    _db.Usuarios.Add(oUsuario);
+
+                    _db.SaveChanges();
+
+                }
+                catch (Exception e1) 
+                {
+
+                }
+
                 signInManager.SignIn( user, isPersistent: false, rememberBrowser: false);
                 IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
             }

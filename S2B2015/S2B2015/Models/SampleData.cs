@@ -22,42 +22,21 @@ using System.Data.Entity;
 
 namespace S2B2015.Models
 {
-    public class SampleData : DropCreateDatabaseIfModelChanges<StoreEntities>
+    public class SampleData : DropCreateDatabaseIfModelChanges<S2BStoreEntities>
     {
-        protected override void Seed(StoreEntities context)
+        protected override void Seed(S2BStoreEntities context)
         {
-            const string ImgUrl = "~/Content/Images/placeholder.png";
 
             var categoria = AddCategorias(context);
-            //var artists = AddArtists(context);
-            //AddAlbums(context, ImgUrl, genres, artists);
 
             context.SaveChanges();
         }
-        /*
-        private static void AddAlbums(StoreEntities context, string imgUrl, List<Genre> genres, List<Artist> artists)
-        {
-            context.Albums.Add(new Album { Title = "...And Justice For All", Genre = genres.Single(g => g.Name == "Metal"), Price = 8.99M, Artist = artists.Single(a => a.Name == "Metallica"), AlbumArtUrl = imgUrl });
-        }
 
-        private static List<Artist> AddArtists(MusicStoreEntities context)
-        {
-            var artists = new List<Artist>
-            {
-              
-                new Genre { Name = "World" }
-            };
-
-            genres.ForEach(s => context.Genres.Add(s));
-            context.SaveChanges();
-            return genres;
-        }*/
-
-        private static List<Categoria> AddCategorias(StoreEntities context)
+        private static List<Categoria> AddCategorias(S2BStoreEntities context)
         {
             var categorias = new List<Categoria>
             {
-                new Categoria { strTitulo = "Eletroeletronico", strDescrição="Produtos " },
+                new Categoria { strTitulo = "TESTE", strDescrição="TESTEE " },
                 
             };
 

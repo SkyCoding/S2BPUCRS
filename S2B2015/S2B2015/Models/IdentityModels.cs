@@ -30,7 +30,7 @@ namespace S2B2015.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("S2BDBConnection", throwIfV1Schema: false)
         {
         }
 

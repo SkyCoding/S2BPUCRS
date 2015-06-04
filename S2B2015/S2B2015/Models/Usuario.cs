@@ -13,5 +13,10 @@ namespace S2B2015.Models
         public string strEmail { get; set; }
         public string strSenha { get; set; }
         public string strNome { get; set; }
+
+
+        //public int ApplicationUserManagerId { get; set; }
+        //public virtual ApplicationUserManager oUserManager { get; set; }
+
     }
 }
