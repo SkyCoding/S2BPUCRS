@@ -13,13 +13,13 @@ namespace S2B2015.Models
 
         public virtual Usuario oUsuario { get; set; }
 
-        private string strPergunta;
+        public string strPergunta { get; set; }
 
-        DateTime dtPergunta;
+        public DateTime dtPergunta { get; set; }
 
-        public string strRespostas;
+        public string strRespostas { get; set; }
 
-        DateTime dtResposta;
+        public DateTime dtResposta { get; set; }
 
     }
 }

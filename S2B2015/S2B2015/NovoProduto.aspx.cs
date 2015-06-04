@@ -72,10 +72,16 @@ namespace S2B2015
 
             float.TryParse(txtPreco.Text.Replace('.', ','), out nPreco);
 
+            
+            Usuario currentUser = (Usuario)(from a in _db.Usuarios
+            where a.strEmail == User.Identity.Name
+            select a).FirstOrDefault();
+
+
             oProduto.strLink = txtImage.Text;
             oProduto.strDescrição = txtDescricao.Text;
             oProduto.strTitulo = txtTitulo.Text;
-            oProduto.UsuarioId = 1;
+            oProduto.UsuarioId = currentUser.UsuarioId;
 
             oProduto.CategoriaId = CategoriaId;
             oProduto.nValidade = nVal;
@@ -89,7 +95,7 @@ namespace S2B2015
 
                 string ss = "DadosProduto?ProdutoId=" + oProduto.ProdutoId;
 
-                Response.Redirect("DadosProduto.aspx?ProdutoId=" + oProduto.ProdutoId);
+                Response.Redirect("DadosProduto?ProdutoId=" + oProduto.ProdutoId);
 
             }catch(Exception e1)
             {

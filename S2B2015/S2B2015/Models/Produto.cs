@@ -20,13 +20,12 @@ namespace S2B2015.Models
         public int CategoriaId { get; set; }
         public virtual Categoria oCategoria { get; set; }
         public float Preco { get; set; }
-        public int UsuarioId { get; set; }
 
+        public int UsuarioId { get; set; }
         public virtual Usuario ousuario { get; set; }
-        // perguntas feitas ao vendedor
-        public List<Pergunta> lstperguntas {get;set;}
-        // se a oferta esta em atividade ou bloqueada
+        
         public bool bAtivada { get; set; }
+        public int nEstado { get; set; }
 
         public Produto(string titulo, string descrição, Categoria categoria, float preco, int validade)
         {

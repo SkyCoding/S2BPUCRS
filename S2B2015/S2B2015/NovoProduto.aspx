@@ -27,14 +27,14 @@
                 <div>
                     <asp:Label ID="lblCategoria" for="cboCategorias" runat="server" Text="Categoria:"></asp:Label>
                     <asp:RequiredFieldValidator ID="rfvCategoria" runat="server" ControlToValidate="cboCategorias" ErrorMessage="Campo obrigatório!" ForeColor="Red">*</asp:RequiredFieldValidator>
-                    <asp:DropDownList id="cboCategorias" class="form-control" runat="server"></asp:DropDownList>
+                    <asp:DropDownList id="cboCategorias" CssClass="form-control" runat="server"></asp:DropDownList>
                 </div>
         
         <br />
                 <div>
                     <asp:Label ID="lblPreco" for="txtPreco" runat="server" Text="Preço:"></asp:Label>
                     <asp:RequiredFieldValidator ID="rfvPreco" runat="server" ControlToValidate="txtPreco" ErrorMessage="*" ForeColor="Red"></asp:RequiredFieldValidator>
-                    <asp:TextBox ID="txtPreco" class="form-control" runat="server" OnTextChanged="txtPreco_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="txtPreco" CssClass="form-control" runat="server" OnTextChanged="txtPreco_TextChanged"></asp:TextBox>
                     <asp:RegularExpressionValidator ID="revPreco" runat="server" ControlToValidate="txtPreco" ErrorMessage="Valor monetário com dois dígitos após o ponto!. Ex: 1.99" ForeColor="Red" ValidationExpression="^\d+(\.\d\d)?$" Display="Dynamic"></asp:RegularExpressionValidator>
                 </div>    
                 
@@ -42,7 +42,7 @@
                 <div>
                     <asp:Label ID="lblTitulo" for="txtTitulo" runat="server" Text="Título:"></asp:Label>
                     <asp:RequiredFieldValidator ID="rfvTitulo" runat="server" ControlToValidate="txtTitulo" ErrorMessage="Campo obrigatório!" ForeColor="Red">*</asp:RequiredFieldValidator>
-                    <asp:TextBox ID="txtTitulo" class="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtTitulo" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
                 
                 
@@ -52,12 +52,12 @@
                     <div class="col-md-8">
                         <asp:Label ID="lblLinkImg" for="txtImage"  runat="server" Text="Link da Imagem:"></asp:Label>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="txtImage" ErrorMessage="Campo obrigatório!" ForeColor="Red">*</asp:RequiredFieldValidator>
-                        <asp:TextBox ID="txtImage" class="form-control" runat="server"></asp:TextBox>
+                        <asp:TextBox ID="txtImage" CssClass="form-control" runat="server"></asp:TextBox>
                     </div>
 
                     <div class="col-md-4">
                         <asp:Label ID="Label1" for="btnImage"  runat="server" Text="Pre-Visualizar"></asp:Label>
-                        <asp:Button ID="btnImage" class="btn btn-primary" runat="server" Text="Imagem" OnClick="btnImage_Click" />
+                        <asp:Button ID="btnImage" CssClass="btn btn-primary" runat="server" Text="Imagem" OnClick="btnImage_Click" />
 
                         
                     </div>
@@ -67,7 +67,7 @@
                 <div >
                     <asp:Label ID="lblValidade" runat="server" Text="Validade:"></asp:Label>
                     <asp:RequiredFieldValidator ID="rfvValidade" runat="server" ControlToValidate="txtValidade" ErrorMessage="Campo obrigatório!" ForeColor="Red">*</asp:RequiredFieldValidator>
-                    <asp:TextBox ID="txtValidade" class="form-control" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="txtValidade" CssClass="form-control" runat="server"></asp:TextBox>
                 </div>
                 
                 
@@ -76,7 +76,7 @@
 
             <div class="col-md-8">
                 <div >
-                    <asp:Image ID="imgProduto" class="img-rounded img-responsive" runat="server" Height="400px" ImageUrl="http://www.gazette-ariegeoise.fr/IMG/jpg/test.jpg" Width="500px" />
+                    <asp:Image ID="imgProduto" CssClass="img-rounded img-responsive" runat="server" Height="400px" ImageUrl="http://www.gazette-ariegeoise.fr/IMG/jpg/test.jpg" Width="500px" />
                 </div>
                 
             </div>
@@ -95,7 +95,7 @@
             <div class="col-md-12">
                 <asp:Label ID="lblDescricao" for="txtDescricao" runat="server" Text="Descrição do Produto:"></asp:Label>                  
                 <asp:RequiredFieldValidator ID="rfvDescricao" runat="server" ControlToValidate="txtDescricao" ErrorMessage="Campo obrigatório!" ForeColor="Red">*</asp:RequiredFieldValidator>
-                <asp:TextBox ID="txtDescricao" class="form-control" runat="server" Height="500px" Width="80%" ></asp:TextBox>
+                <asp:TextBox ID="txtDescricao" CssClass="form-control" runat="server" Height="500px" Width="80%" ></asp:TextBox>
 
             
                 <cc1:HtmlEditorExtender TargetControlID="txtDescricao"  ID="HtmlEditorExtenderDescricao" runat="server"></cc1:HtmlEditorExtender>
@@ -107,7 +107,7 @@
 
         <div class="row">
             <div class="col-md-12">
-                <asp:Button ID="btnSalvar" class="btn-lg btn-primary" Width="80%" runat="server" Text="Finalizar" OnClick="btnSalvar_Click" />
+                <asp:Button ID="btnSalvar" CssClass="btn-lg btn-primary" Width="80%" runat="server" Text="Finalizar" OnClick="btnSalvar_Click" />
             </div>
         </div>
         

@@ -18,7 +18,7 @@
     <div class="row jumbotron">
 
         <div class="col-md-8" >
-            <asp:Image ID="imgProduto" class="img-rounded img-responsive" runat="server" Height="400px" ImageUrl="http://www.gazette-ariegeoise.fr/IMG/jpg/test.jpg" Width="500px" />
+            <asp:Image ID="imgProduto" CssClass="img-rounded img-responsive" runat="server" Height="400px" ImageUrl="http://www.gazette-ariegeoise.fr/IMG/jpg/test.jpg" Width="500px" />
         </div>
 
         <div class="col-md-4" >
