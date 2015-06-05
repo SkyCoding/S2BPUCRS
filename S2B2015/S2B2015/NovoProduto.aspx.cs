@@ -14,6 +14,9 @@ namespace S2B2015
         {
             if (!IsPostBack)
                 ShowData();
+
+            if (!User.Identity.IsAuthenticated)
+                btnSalvar.Enabled = false;
             
         }
 

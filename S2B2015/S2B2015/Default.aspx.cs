@@ -18,5 +18,14 @@ namespace S2B2015
             GridView1.DataBind();
 
         }
+
+        public IQueryable<Categoria> GetCategories()
+        {
+            S2BStoreEntities _db = new S2BStoreEntities();
+            IQueryable<Categoria> query = _db.Categorias;
+            return query;
+            
+        }
+
     }
 }

@@ -10,33 +10,42 @@
 namespace S2B2015 {
     
     
-    public partial class SiteMaster {
+    public partial class WebForm2 {
         
         /// <summary>
-        /// txtPesquisa control.
+        /// lblTitulo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPesquisa;
+        protected global::System.Web.UI.WebControls.Label lblTitulo;
         
         /// <summary>
-        /// btnPesquisar control.
+        /// lblNumeroResultados control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPesquisar;
+        protected global::System.Web.UI.WebControls.Label lblNumeroResultados;
         
         /// <summary>
-        /// MainContent control.
+        /// lblValores control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.Label lblValores;
+        
+        /// <summary>
+        /// grdProdutos control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdProdutos;
     }
 }

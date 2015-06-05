@@ -1,4 +1,5 @@
-﻿using System;
+﻿using S2B2015.Models;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Security.Principal;
@@ -6,6 +7,7 @@ using System.Web;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Linq;
 
 namespace S2B2015
 {
@@ -68,8 +70,20 @@ namespace S2B2015
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            txtPesquisa.Visible = true;
+            S2BStoreEntities db = new S2BStoreEntities();
+            //verificar as paginas na qual vai estar visivel
+            var query = from c in db.Categorias
+                        select c.strTitulo;
+            //foreach (var p in query)
+            //    drplstCategoria.Items.Add(p);
         }
+
+        protected void Pesquisar(object sender, EventArgs e)
+        {
+            Response.Redirect("BuscaProduto?Filtro=" + txtPesquisa.Text);            
+        }
+
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {

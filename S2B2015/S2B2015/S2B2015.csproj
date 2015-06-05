@@ -183,6 +183,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Account\Web.config" />
     <Content Include="ClassDiagram1.cd" />
+    <Content Include="BuscaProduto.aspx" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -409,6 +410,13 @@
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="BuscaProduto.aspx.cs">
+      <DependentUpon>BuscaProduto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="BuscaProduto.aspx.designer.cs">
+      <DependentUpon>BuscaProduto.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
