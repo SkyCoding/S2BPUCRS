@@ -20,144 +20,146 @@ namespace S2B2015
             Preco, 
             Categoria, 
             Vendedor, 
-            Validade
+            Validade,
+            Vendidos
         }
 
         TiposPesquisas oTipoPesquisa = TiposPesquisas.Titulo;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            string sFilter = Request.QueryString["Filtro"];
-
-            oTipoPesquisa = TiposPesquisas.Titulo;              
-
-            sFilter = Request.QueryString["Categoria"];
-                       
-            oTipoPesquisa = TiposPesquisas.Categoria;
-
-            Pesquisa(sFilter);
                 
         }
 
-        void Pesquisa(string sFiltro)
+
+        public IQueryable<ProdutoViewModel> GetAlbuns()
         {
+                      String filtro = null;
 
-            
-            switch(oTipoPesquisa)
+            /*
+            if (Request.QueryString["Filtro"] != null)
             {
-                case TiposPesquisas.Titulo:
-                    PesquisaTitulo();
-                    break;
-                case TiposPesquisas.Categoria:
-                    PesquisaCategoria();
-                    break;
-
+                filtro = Request.QueryString["Filtro"];
+                oTipoPesquisa = TiposPesquisas.Titulo;
             }
 
-            
-                        
+            if (Request.QueryString["Categoria"] != null)
+            {
+                filtro = Request.QueryString["Categoria"];
+                oTipoPesquisa = TiposPesquisas.Categoria;
+            }
 
-            
-
-        }
-
-        void PesquisaTitulo()
-        {
-
+            if (Request.QueryString["Usuario"] != null)
+            {
+                filtro = Request.QueryString["Usuario"];
+                oTipoPesquisa = TiposPesquisas.Vendedor;
+            }
+            if (Context.User.Identity.Name == "admin@s2b.edu.br")
+            {
+                if (Request.QueryString["Vendidos"] != null)
+                {
+                    filtro = Request.QueryString["Vendidos"];
+                    oTipoPesquisa = TiposPesquisas.Vendidos;
+                }
+            }*/
             S2BStoreEntities _db = new S2BStoreEntities();
 
-            var oProd = (from a in _db.Produtos
-                         where a.strTitulo.Contains(Request.QueryString["Filtro"])
-                         select new
-                         {
-                             a.strLink,
-                             a.strTitulo,
-                             a.Preco,
-                             a.CategoriaId
-                         });//).FirstOrDefault();
+            IQueryable<ProdutoViewModel> query = from a in _db.Produtos
+                                                 select new ProdutoViewModel
+                                               {
+                                                   strLink = a.strLink,
+                                                   ProdutoId = a.ProdutoId,
+                                                   strTitulo = a.strTitulo,
+                                                   Preco = a.Preco,
+                                                   oCategoria = a.oCategoria,//a.oCategoria.strTitulo,
+                                                   nEstado = a.nEstado,
+                                                   CategoriaId = a.CategoriaId,
+                                                   UsuarioId = a.UsuarioId,
+                                                   bAtivada=a.bAtivada,
+                                               };
+            if (Context.User.Identity.Name != "admin@s2b.edu.br")
+                query = query.Where(p => p.bAtivada == true);
 
-            //quando for datas;
-            //.OrderByDescending(x => x.Delivery.SubmissionDate);
-            var min = (from p in oProd
-                       orderby p.Preco ascending
-                       select p.Preco).FirstOrDefault();
+            if (Request.QueryString["Filtro"] != null)
+            {
+                filtro = Request.QueryString["Filtro"];
+                query = query.Where(p => p.strTitulo.Contains(filtro));
+                //oTipoPesquisa = TiposPesquisas.Titulo;
+            }
 
-            var max = (from p in oProd
-                       orderby p.Preco descending
-                       select p.Preco).FirstOrDefault();
+            if (Request.QueryString["Categoria"] != null)
+            {
+                filtro = Request.QueryString["Categoria"];
+                int nTempCategoria = 0;
+                int.TryParse(filtro, out nTempCategoria);
+                query = query.Where(p => p.CategoriaId == nTempCategoria);
+                //oTipoPesquisa = TiposPesquisas.Categoria;
+            }
 
-
-            lblTitulo.Text = "Resultado da pesquia por: " + Request.QueryString["Filtro"];
-            lblNumeroResultados.Text = "Foram encontrados " + oProd.Count().ToString() + " resultados";
-            lblValores.Text = "O valores variam entre " + min.ToString() + " reais e " + max.ToString() + " reais.";
-
-
-
-            grdProdutos.DataSource = oProd.ToList();
-
-
-            grdProdutos.DataBind();
-
-        }
-
-        void PesquisaCategoria()
-        {
-
-            S2BStoreEntities _db = new S2BStoreEntities();
-
-            int nCategoria = 0;
-
-            int.TryParse(Request.QueryString["Categoria"], out nCategoria);
-
-            var oProd = (from a in _db.Produtos
-                         where a.CategoriaId == nCategoria
-                         select new
-                         {
-                             a.strLink,
-                             a.strTitulo,
-                             a.Preco,
-                             a.CategoriaId
-                         });//).FirstOrDefault();
-
-            //quando for datas;
-            //.OrderByDescending(x => x.Delivery.SubmissionDate);
-            var min = (from p in oProd
-                       orderby p.Preco ascending
-                       select p.Preco).FirstOrDefault();
-
-            var max = (from p in oProd
-                       orderby p.Preco descending
-                       select p.Preco).FirstOrDefault();
-
-
-            lblTitulo.Text = "Resultado da pesquia por: " + Request.QueryString["Categoria"];
-            lblNumeroResultados.Text = "Foram encontrados " + oProd.Count().ToString() + " resultados";
-            lblValores.Text = "O valores variam entre " + min.ToString() + " reais e " + max.ToString() + " reais.";
-
-
-
-            grdProdutos.DataSource = oProd.ToList();
-
-
-            grdProdutos.DataBind();
-
-        }
-
-        protected void grdProdutos_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-            int idx = (int)e.Row.RowIndex;
+            if (Request.QueryString["Usuario"] != null)
+            {
+                filtro = Request.QueryString["Usuario"];
+                int nUsuario = 0;
+                int.TryParse(filtro, out nUsuario);
+                query = query.Where(p =>p.UsuarioId == nUsuario);
+                //oTipoPesquisa = TiposPesquisas.Vendedor;
+            }
+            if (Context.User.Identity.Name == "admin@s2b.edu.br")
+            {
+                if (Request.QueryString["Vendidos"] != null)
+                {
+                    filtro = Request.QueryString["Vendidos"];
+                    bool blnVendido;
+                    bool.TryParse(filtro, out blnVendido);
+                    if (blnVendido == true)
+                        query = query.Where(p => p.nEstado == 3);
+                    //oTipoPesquisa = TiposPesquisas.Vendidos;
+                }
+            }
             
-            //string value = grdProdutos.Rows[1].Cells["uri"].Value.ToString();
-            //ThreadPool.QueueUserWorkItem(delegate
-            //{
-            //        HttpWebRequest myRequest = (HttpWebRequest)WebRequest.Create("value");
-            //        myRequest.Method = "GET";
-            //        HttpWebResponse myResponse = (HttpWebResponse)myRequest.GetResponse();
-            //        System.Drawing.Bitmap bmp = new System.Drawing.Bitmap(myResponse.GetResponseStream());
-            //        myResponse.Close();
-            //        grdProdutos.Rows[idx].Cells["Img"].Value = bmp;
-            //});
-            
+            if (filtro != null)
+            {
+                /*switch (oTipoPesquisa)
+                {
+                    case TiposPesquisas.Titulo:
+                        query = query.Where(p => p.strTitulo.Contains(filtro));
+                        break;
+                    case TiposPesquisas.Categoria:
+                        int nTempCategoria = 0;
+                        int.TryParse(filtro, out nTempCategoria);
+                        query = query.Where(p => p.CategoriaId == nTempCategoria);
+                        break;
+                    case TiposPesquisas.Vendedor:
+                        int nUsuario = 0;
+                        int.TryParse(filtro, out nUsuario);
+                        query = query.Where(p =>p.UsuarioId == nUsuario);
+                        break;
+                    case TiposPesquisas.Vendidos:
+                        bool blnVendido;
+                        bool.TryParse(filtro, out blnVendido);
+                        if (blnVendido == true)
+                            query = query.Where(p => p.nEstado == 3);
+                        break;
+
+                }*/
+
+                var min = (from p in query
+                           orderby p.Preco ascending
+                           select p.Preco).FirstOrDefault();
+
+                var max = (from p in query
+                           orderby p.Preco descending
+                           select p.Preco).FirstOrDefault();
+
+
+                lblTitulo.Text = "Resultado da pesquia por: " + Request.QueryString["Categoria"];
+                lblNumeroResultados.Text = "Foram encontrados " + query.Count().ToString() + " resultados";
+                lblValores.Text = "O valores variam entre " + min.ToString() + " reais e " + max.ToString() + " reais.";
+            }
+
+            return query;
         }
+
+
     }
 }

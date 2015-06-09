@@ -12,10 +12,10 @@ namespace S2B2015
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            S2BStoreEntities _db = new S2BStoreEntities();
+            //S2BStoreEntities _db = new S2BStoreEntities();
             
-            GridView1.DataSource = _db.Categorias.ToList();
-            GridView1.DataBind();
+            //GridView1.DataSource = _db.Categorias.ToList();
+            //GridView1.DataBind();
 
         }
 

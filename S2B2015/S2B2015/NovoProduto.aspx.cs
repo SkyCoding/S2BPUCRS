@@ -89,7 +89,7 @@ namespace S2B2015
             oProduto.CategoriaId = CategoriaId;
             oProduto.nValidade = nVal;
             oProduto.Preco = nPreco;
-
+            oProduto.bAtivada = true;
             _db.Produtos.Add(oProduto);
 
             try

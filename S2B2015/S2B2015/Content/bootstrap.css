@@ -183,7 +183,7 @@ input[type="reset"],
 input[type="submit"] {
   cursor: pointer;
   -webkit-appearance: button;
-}
+    }
 
 button[disabled],
 html input[disabled] {
@@ -1407,6 +1407,7 @@ pre code {
 table {
   max-width: 100%;
   background-color: transparent;
+    margin-top: 0px;
 }
 
 th {

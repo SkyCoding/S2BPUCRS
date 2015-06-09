@@ -38,7 +38,10 @@ namespace S2B2015.Account
                 switch (result)
                 {
                     case SignInStatus.Success:
-                        IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
+                        if (Email.Text.Equals("admin@s2b.edu.br"))
+                            Response.Redirect("~/Admin.aspx");
+                        else
+                            IdentityHelper.RedirectToReturnUrl(Request.QueryString["ReturnUrl"], Response);
                         break;
                     case SignInStatus.LockedOut:
                         Response.Redirect("/Account/Lockout");

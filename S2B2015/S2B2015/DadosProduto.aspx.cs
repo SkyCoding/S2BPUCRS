@@ -47,6 +47,10 @@ namespace S2B2015
 
                 if (query != null)
                 {
+                    if (query.bAtivada == false && query.nEstado == 3)
+                    {
+                        btnComprar.Visible = false;  
+                    }
                     ViewState["id"] = id;
                     lblTitulo.Text = query.strTitulo;
                     imgProduto.ImageUrl = query.strLink;

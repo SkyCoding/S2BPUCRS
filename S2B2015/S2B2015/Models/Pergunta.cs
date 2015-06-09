@@ -21,5 +21,6 @@ namespace S2B2015.Models
 
         public DateTime dtResposta { get; set; }
 
+        public int ProdutoId { get; set; }
     }
 }
