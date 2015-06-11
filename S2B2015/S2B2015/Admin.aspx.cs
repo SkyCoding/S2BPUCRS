@@ -42,11 +42,19 @@ namespace S2B2015
             string filtro = Request.QueryString["Relatório"];
             if (filtro== "itens")
                 this.relatorio_itens();
-            if (int.TryParse(filtro,out userid))
+            if (int.TryParse(filtro, out userid))
             {
                 this.relatorio_usuario(userid);
             }
-                
+
+            if(Request.QueryString["Relatório"] != null)
+            {
+                //collapseOne.Attributes["class"] = "panel-collapse collapse";
+                //collapseTwo.Attributes["class"] = "panel-collapse collapse";
+                //collapseThree.Attributes["class"] = "panel-collapse collapse in";
+
+            }
+            
         }
 
 
@@ -58,6 +66,11 @@ namespace S2B2015
                                                       where u.strEmail == drpListaUsuarios.SelectedValue
                                                       select u.UsuarioId).FirstOrDefault()*/
                                 select p);
+
+            var queryCompras = (from p in _db.Produtos
+                                where p.CompradorId == userid 
+                                select p);
+
             var queryPerguntas = (from p in _db.Perguntas
                                   where p.UsuarioId == userid /*(from u in _db.Usuarios
                                                         where u.strEmail == drpListaUsuarios.SelectedValue
@@ -69,7 +82,8 @@ namespace S2B2015
                                              && p.strRespostas != ""
                                   select p);
             int nOfertas = queryOfertas.Count();
-            int nVendidos = queryOfertas.Where(p => p.nEstado == 3).Count();
+            int nVendidos = queryOfertas.Where(p => p.nEstado == 2).Count();
+            int nComprados = queryCompras.Where(p => p.CompradorId == userid).Count();
             int nPerguntas = queryPerguntas.Count();
             int nRespostas = queryRespostas.Count();
             string strNomeUsuario = (from u in _db.Usuarios
@@ -82,9 +96,11 @@ namespace S2B2015
 
             lnkItensOfertados.Text = "Vizualizar os " + nOfertas + " produtos oferecidos.";
             lnkVendidos.Text = "Vizualizar os " + nVendidos + " produtos vendidos.";
+            lnkComprados.Text = "Vizualizar os " + nComprados + " produtos comprados.";
 
             prodIframe.Attributes.Add("src", "~/adminFrame?Usuario=" + userid.ToString());
             prodIframe.Visible = true;
+
         }
         protected void relatorio_itens ()
         {
@@ -92,10 +108,11 @@ namespace S2B2015
             var query = from p in _db.Produtos
                         select p;
             int nItens = query.Count();
-            int nItensblock = query.Where(p => p.bAtivada == false).Count();
+            //int nItensblock = query.Where(p => p.bAtivada == false).Count();
             int nBlockValidade =  query.Where(p => p.bAtivada == false && p.nEstado==1).Count();
-            int nblockVendedor = query.Where(p => p.bAtivada == false && p.nEstado == 2).Count();
-            int nVendidos = query.Where(p => p.bAtivada == false && p.nEstado == 3).Count();
+            int nblockVendedor = query.Where(p => p.bAtivada == false ).Count();
+            int nVendidos = query.Where(p =>  p.nEstado == 2).Count();
+            int nItensblock = nVendidos + nBlockValidade + nblockVendedor;
             lblRelatorioItem.Text= "Numero de itens anúnciados :" + nItens + ", numero de itens bloqueados:"+ nItensblock;
             lblRelatorioItem.Text +=", itens bloqueados por validade:" + nBlockValidade + ", itens bloqueados pelo vendedor:" + nblockVendedor + ", itens vendidos" + nVendidos;
         }
@@ -174,6 +191,16 @@ namespace S2B2015
                 this.relatorio_usuario(userid);
             }
             Response.Redirect("~/BuscaProduto?Usuario=" + userid+ "&Vendidos=true");
+        }
+
+        protected void lnkComprados_Click(object sender, EventArgs e)
+        {
+            int userid;
+            if (int.TryParse(Request.QueryString["Relatório"], out userid))
+            {
+                this.relatorio_usuario(userid);
+            }
+            Response.Redirect("~/BuscaProduto?Comprador=" + userid + "&Comprados=true");
         }
 
        

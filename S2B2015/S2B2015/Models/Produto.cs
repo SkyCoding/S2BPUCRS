@@ -27,6 +27,9 @@ namespace S2B2015.Models
         public bool bAtivada { get; set; }
         public int nEstado { get; set; }
 
+        public int CompradorId { get; set; }
+        public virtual Usuario oComprador { get; set; }
+
         public Produto(string titulo, string descrição, Categoria categoria, float preco, int validade)
         {
             this.strTitulo = titulo;

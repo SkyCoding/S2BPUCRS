@@ -1,15 +1,59 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BuscaProduto.aspx.cs" Inherits="S2B2015.WebForm2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="panel">
-        <asp:Label ID="lblTitulo" runat="server" Text="Label"></asp:Label>
-        <asp:Label ID="lblNumeroResultados" runat="server" Text="Label"></asp:Label>
-        <asp:Label ID="lblValores" runat="server" Text="Label"></asp:Label>
+        <asp:Label CssClass="h2" ID="lblTitulo" runat="server" Text="Label"></asp:Label>
+        <br />
+        <asp:Label CssClass="h2" ID="lblNumeroResultados" runat="server" Text="Label"></asp:Label>
+        <br />
+        <asp:Label CssClass="h2" ID="lblValores" runat="server" Text="Label"></asp:Label>
+    </div>
+
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            
+        <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Pesquisa avançada:
+            </a>
+            </h4>
+        </div>
+        <div   id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+                <%--EXEMPLO--%>
+                
+                <div class="row">  
+                    <div class="col-md-8">                
+                        <div class="row">       
+                            <div class="col-md-12">
+                                <asp:Label ID="lblNome" runat="server" Text="Nome"></asp:Label><br />
+                                <asp:TextBox CssClass="form-control" ID="txtNomeCategoria" runat="server" Width="100%"></asp:TextBox>
+                                <asp:Label ID="lblerrorname" runat="server" ForeColor="Red"></asp:Label>
+                            </div>
+                
+                            <div class="col-md-12">
+                                <asp:Label ID="lblDescrição" runat="server" Text="Descrição"></asp:Label><br />
+                                <asp:TextBox CssClass="form-control" ID="txtDescricaoCategoria" runat="server" Width="100%"></asp:TextBox>
+                                <asp:Label ID="lblerroDescr" runat="server" ForeColor="Red"></asp:Label>
+                            </div>                
+                        </div>            
+                    </div>
+                    <div class="col-md-4">      
+                        <br />
+                        <asp:Button ID="btnPesquisar" Height="100px" Width="100%" CssClass="btn btn-success form-control" runat="server" Text="Pesquisar" />
+                    </div>
+
+            </div>
+        </div>
+        </div>
     </div>
     
+                        <br />
 
     <asp:ListView ID="produtList" runat="server"
         DataKeyNames="produtoId" GroupItemCount="1"
-        ItemType="S2B2015.Models.ProdutoViewModel" SelectMethod="GetAlbuns">
+        ItemType="S2B2015.Models.ProdutoViewModel" SelectMethod="GetProdutos">
         <EmptyDataTemplate>
             <table>
                 <tr>
@@ -48,7 +92,12 @@
                     </td>
                     <td style="width:300px">
                         <a href="BuscaProduto.aspx?Categoria=<%#:Item.CategoriaId%>"><%#: Item.oCategoria.strTitulo%></a>                       
-                    </td>                    
+                    </td>  
+                    
+                    <td style="width:300px">
+                        <a href="BuscaProduto.aspx?Categoria=<%#:Item.CategoriaId%>"><%#: Item.oCategoria.strTitulo%></a>                       
+                    </td>  
+                                     
                     <%--<td style="width:200px">
                         <%#: Item.nEstado%>
                     </td>--%>

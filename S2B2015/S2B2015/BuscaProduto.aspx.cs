@@ -32,23 +32,10 @@ namespace S2B2015
         }
 
 
-        public IQueryable<ProdutoViewModel> GetAlbuns()
+        public IQueryable<ProdutoViewModel> GetProdutos()
         {
-                      String filtro = null;
-
-            /*
-            if (Request.QueryString["Filtro"] != null)
-            {
-                filtro = Request.QueryString["Filtro"];
-                oTipoPesquisa = TiposPesquisas.Titulo;
-            }
-
-            if (Request.QueryString["Categoria"] != null)
-            {
-                filtro = Request.QueryString["Categoria"];
-                oTipoPesquisa = TiposPesquisas.Categoria;
-            }
-
+            String filtro = null;
+            
             if (Request.QueryString["Usuario"] != null)
             {
                 filtro = Request.QueryString["Usuario"];
@@ -61,7 +48,7 @@ namespace S2B2015
                     filtro = Request.QueryString["Vendidos"];
                     oTipoPesquisa = TiposPesquisas.Vendidos;
                 }
-            }*/
+            }
             S2BStoreEntities _db = new S2BStoreEntities();
 
             IQueryable<ProdutoViewModel> query = from a in _db.Produtos
@@ -76,15 +63,20 @@ namespace S2B2015
                                                    CategoriaId = a.CategoriaId,
                                                    UsuarioId = a.UsuarioId,
                                                    bAtivada=a.bAtivada,
+                                                   CompradorID = a.CompradorId
                                                };
             if (Context.User.Identity.Name != "admin@s2b.edu.br")
-                query = query.Where(p => p.bAtivada == true);
+                query = query.Where(p => p.bAtivada == true && p.nEstado <2);
 
             if (Request.QueryString["Filtro"] != null)
             {
                 filtro = Request.QueryString["Filtro"];
                 query = query.Where(p => p.strTitulo.Contains(filtro));
-                //oTipoPesquisa = TiposPesquisas.Titulo;
+
+
+                if (query != null)
+                    lblTitulo.Text = "Resultados da pesquia por: " + filtro;
+
             }
 
             if (Request.QueryString["Categoria"] != null)
@@ -93,7 +85,12 @@ namespace S2B2015
                 int nTempCategoria = 0;
                 int.TryParse(filtro, out nTempCategoria);
                 query = query.Where(p => p.CategoriaId == nTempCategoria);
-                //oTipoPesquisa = TiposPesquisas.Categoria;
+                
+                var oCategoria = (from p in query
+                           select p.oCategoria.strTitulo).FirstOrDefault();
+                if (oCategoria != null)
+                    lblTitulo.Text = "Resultados da pesquia pela categoria: " + oCategoria.ToString();
+
             }
 
             if (Request.QueryString["Usuario"] != null)
@@ -102,8 +99,18 @@ namespace S2B2015
                 int nUsuario = 0;
                 int.TryParse(filtro, out nUsuario);
                 query = query.Where(p =>p.UsuarioId == nUsuario);
-                //oTipoPesquisa = TiposPesquisas.Vendedor;
+
+                var strVendedor = (from a in _db.Usuarios
+                         where a.UsuarioId == nUsuario
+                               select a.strNome).First();
+
+
+                if (strVendedor != null)
+                    lblTitulo.Text = "Resultados da pesquia pelo vendedor: " + strVendedor.ToString();
+
+
             }
+
             if (Context.User.Identity.Name == "admin@s2b.edu.br")
             {
                 if (Request.QueryString["Vendidos"] != null)
@@ -112,37 +119,28 @@ namespace S2B2015
                     bool blnVendido;
                     bool.TryParse(filtro, out blnVendido);
                     if (blnVendido == true)
-                        query = query.Where(p => p.nEstado == 3);
-                    //oTipoPesquisa = TiposPesquisas.Vendidos;
+                        query = query.Where(p => p.nEstado == 2);
+                }
+
+                if (Request.QueryString["Comprados"] != null)
+                {
+                    filtro = Request.QueryString["Comprados"];
+                    bool blnComprados;
+                    bool.TryParse(filtro, out blnComprados);
+                    if (blnComprados == true)
+                    {
+                        filtro = Request.QueryString["Comprador"];
+                        int nUsuario = 0;
+                        int.TryParse(filtro, out nUsuario);
+                        query = query.Where(p => p.CompradorID == nUsuario);
+                    }
+                        
                 }
             }
+
             
             if (filtro != null)
             {
-                /*switch (oTipoPesquisa)
-                {
-                    case TiposPesquisas.Titulo:
-                        query = query.Where(p => p.strTitulo.Contains(filtro));
-                        break;
-                    case TiposPesquisas.Categoria:
-                        int nTempCategoria = 0;
-                        int.TryParse(filtro, out nTempCategoria);
-                        query = query.Where(p => p.CategoriaId == nTempCategoria);
-                        break;
-                    case TiposPesquisas.Vendedor:
-                        int nUsuario = 0;
-                        int.TryParse(filtro, out nUsuario);
-                        query = query.Where(p =>p.UsuarioId == nUsuario);
-                        break;
-                    case TiposPesquisas.Vendidos:
-                        bool blnVendido;
-                        bool.TryParse(filtro, out blnVendido);
-                        if (blnVendido == true)
-                            query = query.Where(p => p.nEstado == 3);
-                        break;
-
-                }*/
-
                 var min = (from p in query
                            orderby p.Preco ascending
                            select p.Preco).FirstOrDefault();
@@ -152,9 +150,8 @@ namespace S2B2015
                            select p.Preco).FirstOrDefault();
 
 
-                lblTitulo.Text = "Resultado da pesquia por: " + Request.QueryString["Categoria"];
-                lblNumeroResultados.Text = "Foram encontrados " + query.Count().ToString() + " resultados";
-                lblValores.Text = "O valores variam entre " + min.ToString() + " reais e " + max.ToString() + " reais.";
+                lblNumeroResultados.Text = "Foram encontrados: " + query.Count().ToString() + " resultados";
+                lblValores.Text = "O valores variam entre R$" + min.ToString() + " e R$" + max.ToString() +".";
             }
 
             return query;
