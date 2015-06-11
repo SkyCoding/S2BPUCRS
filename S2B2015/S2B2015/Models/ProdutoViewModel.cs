@@ -26,6 +26,7 @@ namespace S2B2015.Models
         public string strPergunta { get; set; }
         public int nPtId { get; set; }
 
+        public int nAvaliacao { get; set; }
 
         public int CompradorID { get; set; }
         public virtual Usuario oComprador { get; set; }

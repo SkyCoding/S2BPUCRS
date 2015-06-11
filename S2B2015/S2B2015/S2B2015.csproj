@@ -400,6 +400,10 @@
     <Compile Include="Migrations\201506110200184_comprador do produto.Designer.cs">
       <DependentUpon>201506110200184_comprador do produto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506111929440_avaliacao.cs" />
+    <Compile Include="Migrations\201506111929440_avaliacao.Designer.cs">
+      <DependentUpon>201506111929440_avaliacao.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -464,6 +468,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="pic\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201506040323559_InitialCreate.resx">
@@ -471,6 +476,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506110200184_comprador do produto.resx">
       <DependentUpon>201506110200184_comprador do produto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506111929440_avaliacao.resx">
+      <DependentUpon>201506111929440_avaliacao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

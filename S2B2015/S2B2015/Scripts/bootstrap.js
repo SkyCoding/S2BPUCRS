@@ -1987,7 +1987,7 @@ if (!jQuery) { throw new Error("Bootstrap requires jQuery") }
 
   // AFFIX NO CONFLICT
   // =================
-
+        
   $.fn.affix.noConflict = function () {
     $.fn.affix = old
     return this

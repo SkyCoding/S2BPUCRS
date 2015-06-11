@@ -203,6 +203,34 @@ namespace S2B2015
             Response.Redirect("~/BuscaProduto?Comprador=" + userid + "&Comprados=true");
         }
 
+
+
+        public IQueryable<PerguntaViewModel> GetPerguntasRespondidas()
+        {
+            S2BStoreEntities _db = new S2BStoreEntities();
+
+
+            IQueryable<PerguntaViewModel> query = (from perg in _db.Perguntas
+                                                   join prod in _db.Produtos on perg.ProdutoId equals prod.ProdutoId
+                                                   select new PerguntaViewModel
+                                                   {
+                                                       quemRespondeu = prod.UsuarioId,
+                                                       ProdutoId = prod.ProdutoId,
+                                                       StrTituloProduto = prod.strTitulo,
+                                                       StrLinkProduto = prod.strLink,
+                                                       strPergunta = perg.strPergunta,
+                                                       strRespostas = perg.strRespostas,
+                                                       dtPergunta = perg.dtPergunta,
+                                                       dtResposta = perg.dtResposta,
+                                                       quemPerguntou = perg.UsuarioId
+                                                   });
+
+
+
+
+
+            return query;
+        }
        
 
     }

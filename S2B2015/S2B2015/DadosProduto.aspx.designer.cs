@@ -67,6 +67,24 @@ namespace S2B2015 {
         protected global::System.Web.UI.WebControls.Button btnCancelar;
         
         /// <summary>
+        /// lblRating control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblRating;
+        
+        /// <summary>
+        /// RatingCompra control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.Rating RatingCompra;
+        
+        /// <summary>
         /// btnListaUsuario control.
         /// </summary>
         /// <remarks>

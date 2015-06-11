@@ -10,9 +10,9 @@
         <br />
         <div class="row">
             <div class="col-md-12">
-                <asp:Label  ID="lblHeader" runat="server" ></asp:Label><br />
+                <asp:Label  ID="lblHeader" CssClass="h4" runat="server" ></asp:Label><br /><br />
                  <asp:Label CssClass="h1"  ID="lblPergunta" runat="server" ></asp:Label><br />
-                <asp:TextBox ID="txtResposta" runat="server" Width="60%" ></asp:TextBox>
+                <asp:TextBox ID="txtResposta" runat="server" Width="50%" Height="187px" TextMode="MultiLine" ></asp:TextBox>
                 <asp:Label ID="lblErroResposta" runat="server"  ForeColor="Red"></asp:Label>
                 <asp:Button ID="btnResponder" CssClass="btn-lg btn-succes" Width="50%" runat="server" Text="Enviar resposta" OnClick="btnResponder_Click" />
                 <br />

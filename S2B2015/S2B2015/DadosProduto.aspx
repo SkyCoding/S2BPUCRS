@@ -1,6 +1,34 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="DadosProduto.aspx.cs" Inherits="S2B2015.DadosProduto" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     
+    <style type="text/css">
+                .StarCss { 
+                    background-image: url(/pic/EmptyStar.png);
+                    height:24px;
+                    width:24px;
+                    font-size: 0pt;
+                    margin: 0px;
+                    padding: 0px;
+                    cursor: pointer;
+                    display: block;
+                    background-repeat: no-repeat;
+                }
+                .FilledStarCss {
+                    background-image: url(/pic/Filled_star.png);
+                    height:24px;
+                    width:24px;
+                }
+                .EmptyStarCss {
+                    background-image: url(/pic/EmptyStar.png);
+                    height:24px;
+                    width:24px;
+                }
+                .WaitingStarCss {
+                    background-image: url(/pic/SavedStar.png);
+                    height:24px;
+                    width:24px;
+                }
+            </style>
     
     <div class="container">
     <div class="row jumbotron">
@@ -28,6 +56,37 @@
             <div class="row">
                 <asp:Button ID="btnCancelar" CssClass="btn  btn-danger col-md-6" runat="server" Text="Cancelar Anúncio" OnClick="btnCancelar_Click"  />                
             </div>
+
+            <div class="row">
+                <div runat="server" UpdateMode="Always" ChildrenAsTriggers="True">
+                    <ContentTemplate>
+                        <ul>
+                            <li> <asp:Label ID="lblRating" runat="server" Text="Avaliação do vendedor:"></asp:Label>
+                                <br />           
+
+                                                                    
+                                <ajaxToolkit:Rating
+                                        ClientIDMode="AutoID"
+                                        ID="RatingCompra"
+                                        runat="server"
+                                        MaxRating="5"
+                                        CurrentRating="0"
+                                        StarCssClass="StarCss"
+                                        FilledStarCssClass="FilledStarCss"
+                                        EmptyStarCssClass="EmptyStarCss"
+                                        WaitingStarCssClass="WaitingStarCss"
+                                        AutoPostBack="true"
+                                        OnChanged="AvaliarCompra" Enabled="False"
+                                        >
+                                    </ajaxToolkit:Rating>
+
+                                        </li>
+                                </ul>
+                    </ContentTemplate>
+                </div>  
+            </div>
+
+
 
             <br />
 

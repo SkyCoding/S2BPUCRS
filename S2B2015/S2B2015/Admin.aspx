@@ -103,6 +103,92 @@
             </div>
 
 
+
+            <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingPerguntas">
+                <h4 class="panel-title">
+                <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapsePerguntas" aria-expanded="false" aria-controls="collapsePerguntas">
+                    Perguntas e respostas.
+                </a>
+                </h4>
+            </div>
+            <div  id="collapsePerguntas" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingPerguntas">
+                
+
+                 <div class="panel-body">                
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <asp:ListView ID="ListViewPerguntasRespondidas" runat="server"
+                                DataKeyNames="produtoId" GroupItemCount="1"
+                                ItemType="S2B2015.Models.PerguntaViewModel" SelectMethod="GetPerguntasRespondidas" >
+                                <EmptyDataTemplate>
+                                    <table>
+                                        <tr>
+                                             <td>Você ainda não respondeu nem uma pergunta</td> 
+                                        </tr>
+                                    </table>
+                                </EmptyDataTemplate>
+                                <EmptyItemTemplate>
+                                    <td />
+                                </EmptyItemTemplate>
+    
+                                <ItemTemplate>
+                                    <td runat="server">
+                                        <table class="table table-striped table-bordered table-hover" style="align-items:center">
+
+                    
+                                            <td style="width:100px">
+                                                <a style="display:inline-block" href="../DadosProduto.aspx?ProdutoId=<%#:Item.ProdutoId%>">
+                                                    <asp:Image runat="server" ID="Image2" Height="160px"
+                                                        ImageUrl='<%#: Item.StrLinkProduto%>' />
+                                                </a>
+                                            </td>
+
+                                            <td style="width:400px">                        
+                                                <a href="../DadosProduto.aspx?ProdutoId=<%#:Item.ProdutoId%>"><%#: Item.StrTituloProduto%></a>
+                                            </td>
+                                            
+                                            
+                                            <td style="width:400px">   
+                                                <b>Pergunta feita em:  <%#: Item.dtPergunta%> </b>
+                                                <br />
+                                                <b>Pergunta:</b>
+                                                 <%#: Item.strPergunta%>  
+                                                
+                                                <br />
+                                                <b>ID de quem Perguntou: <%#: Item.quemPerguntou%></b>
+
+                                                <hr />  
+
+
+                                                <b>Respondido em:  <%#: Item.dtResposta%> </b>
+                                                <br />
+                                                <b>Resposta:</b>       
+                                                 <%#: Item.strRespostas%>  
+
+                                                <br />
+                                                <b>ID de quem Respondeu: <%#: Item.quemRespondeu%></b>
+                                            </td>
+                                            
+                          
+                                    </table>
+                                        </p>
+                                    </td>
+                                </ItemTemplate>
+                            </asp:ListView>
+                              
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+            </div>
+
+
             <div class="panel panel-default">
                 <div class="panel-heading" role="tab" id="headingThree">
                     <h4 class="panel-title">

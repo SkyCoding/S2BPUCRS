@@ -97,7 +97,7 @@ namespace S2B2015
                                          select p.ProdutoId).Contains(pt.ProdutoId) && pt.strRespostas == ""
                                   select pt).Count();
                 notificacoes.InnerText = (nSolicitacoesCompra + nPerguntas).ToString();
-                //btnMeusProdutos.s
+                
             }
             if (Context.User.Identity.Name == "admin@s2b.edu.br")
                 btnAdmin.Visible = true;

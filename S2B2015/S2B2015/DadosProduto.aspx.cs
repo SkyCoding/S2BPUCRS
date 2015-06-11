@@ -46,11 +46,21 @@ namespace S2B2015
                 else
                          query = (Produto)(from a in _db.Produtos
                                 where a.ProdutoId == id
-                                && (userid == a.UsuarioId ||(a.nEstado <2 && a.bAtivada==true))
+                                && (userid == a.UsuarioId || userid == a.CompradorId || (a.nEstado < 2 && a.bAtivada == true))
                                 select a).FirstOrDefault();
-                    
-                
-                                
+
+                if (query.CompradorId == userid && userid != 0)
+                {
+                    btnCancelar.Visible = false;
+                    btnComprar.Visible = false;
+                    lblRating.Text = "Avalie o vendedor!";
+                }
+                else
+                {
+
+                    AtualizaRatingVendedor();
+                }
+
 
                 if (query != null)
                 {
@@ -108,6 +118,54 @@ namespace S2B2015
 
 
         }
+
+        public void AtualizaRatingVendedor()
+        {
+            S2BStoreEntities _db = new S2BStoreEntities();            
+
+            int nProdId;
+            int.TryParse(Request.QueryString["ProdutoId"], out nProdId);
+
+            IQueryable<ProdutoViewModel> query = from a in _db.Produtos
+                                                 where a.nEstado == 2 &&
+                                                    a.UsuarioId == (from u in _db.Produtos
+                                                                    where u.ProdutoId == nProdId
+                                                                    select u.UsuarioId).FirstOrDefault()
+                                                 select new ProdutoViewModel
+                                                 {
+                                                     strLink = a.strLink,
+                                                     ProdutoId = a.ProdutoId,
+                                                     strTitulo = a.strTitulo,
+                                                     Preco = a.Preco,
+                                                     oCategoria = a.oCategoria,//a.oCategoria.strTitulo,
+                                                     nEstado = a.nEstado,
+                                                     CategoriaId = a.CategoriaId,
+                                                     UsuarioId = a.UsuarioId,
+                                                     bAtivada = a.bAtivada,
+                                                     nAvaliacao = a.nAvaliacao
+                                                 };
+
+
+
+            var queryAvaliacao = from a in query
+                                 where a.nAvaliacao > 0
+                                 select new
+                                 {
+                                     a.nAvaliacao
+                                 };
+
+            if (queryAvaliacao.Count() > 0)
+            {
+
+                float Rating = queryAvaliacao.AsEnumerable().Sum(o => o.nAvaliacao) / queryAvaliacao.Count();
+
+                RatingCompra.CurrentRating = (int)Rating;
+            }
+
+
+            
+        }
+
 
         bool PermissaoCancelar ()
         {
@@ -179,7 +237,37 @@ namespace S2B2015
 
         }
 
-     
+        protected void AvaliarCompra(object sender, AjaxControlToolkit.RatingEventArgs e)
+        {
+
+            int nProdId;
+            if (int.TryParse(Request.QueryString["ProdutoId"], out nProdId))
+            {
+                S2BStoreEntities _db = new S2BStoreEntities();             
+
+                int userid = (from u in _db.Usuarios
+                              where u.strEmail == Context.User.Identity.Name
+
+                              select u.UsuarioId).FirstOrDefault();
+
+                Produto queryComprador;
+                
+                queryComprador = (Produto)(from a in _db.Produtos
+                    where a.ProdutoId == nProdId && userid == a.CompradorId
+                    select a).FirstOrDefault();
+
+                if (queryComprador != null)
+                {
+
+                    var query = (from p in _db.Produtos
+                                 where p.ProdutoId == nProdId
+                                 select p).First();
+                    query.nAvaliacao = RatingCompra.CurrentRating;
+                    _db.SaveChanges();
+                }
+            }
+
+        }
 
         protected void btnVender_Click(object sender, EventArgs e)
         {
