@@ -48,17 +48,19 @@ namespace S2B2015
                                 where a.ProdutoId == id
                                 && (userid == a.UsuarioId || userid == a.CompradorId || (a.nEstado < 2 && a.bAtivada == true))
                                 select a).FirstOrDefault();
-
-                if (query.CompradorId == userid && userid != 0)
+                if (query != null)
                 {
-                    btnCancelar.Visible = false;
-                    btnComprar.Visible = false;
-                    lblRating.Text = "Avalie o vendedor!";
-                }
-                else
-                {
+                    if (query.CompradorId == userid && userid != 0)
+                    {
+                        btnCancelar.Visible = false;
+                        btnComprar.Visible = false;
+                        lblRating.Text = "Avalie o vendedor!";
+                    }
+                    else
+                    {
 
-                    AtualizaRatingVendedor();
+                        AtualizaRatingVendedor();
+                    }
                 }
 
 
@@ -169,8 +171,25 @@ namespace S2B2015
 
         bool PermissaoCancelar ()
         {
-            if (UsuarioVendedor())
+            if (UsuarioVendedor() && !ProdutoCancelado())
                 return true;
+            return false;
+        }
+        bool ProdutoCancelado()
+        {
+            S2BStoreEntities _db = new S2BStoreEntities();
+            int id ;
+            if(int.TryParse(Request.QueryString["ProdutoId"],out id))
+            {
+
+                bool nstatus = (from p in _db.Produtos
+                               where p.ProdutoId == id
+                               select p.bAtivada).First();
+                if (nstatus == false)
+                    return true;
+                else
+                    return false;
+            }
             return false;
         }
         bool PermissaoPergunta ()
@@ -359,6 +378,37 @@ namespace S2B2015
                          select p).First();
             query.bAtivada = false;
             _db.SaveChanges();
+        }
+
+        protected void btncep_Click(object sender, EventArgs e)
+        {
+            int ncep;
+            if (Int32.TryParse(txtCep.Text, out ncep) && txtCep.Text.Length == 8)
+            {
+                string strCepOrigem = "90619900";
+                string strCepDest = txtCep.Text;
+                string nCdEmpresa = string.Empty;
+                string sDsSenha = string.Empty;
+                string nCdServico = "40010";
+                string nVlPeso = "1";
+                int nCdFormato = 1;
+                decimal nVlComprimento = 16;
+                decimal nVlAltura = 2;
+                decimal nVlLargura = 11;
+                decimal nVlDiametro = 2;
+                Correios.CalcPrecoPrazoWSSoapClient webServiceCorreios = new Correios.CalcPrecoPrazoWSSoapClient("CalcPrecoPrazoWSSoap");
+                Correios.cResultado retornoCorreios = webServiceCorreios.CalcPrecoPrazo(nCdEmpresa, sDsSenha, nCdServico, strCepOrigem, strCepDest, nVlPeso, nCdFormato, nVlComprimento, nVlAltura, nVlLargura, nVlDiametro, "N", 0, "N");
+                if (retornoCorreios.Servicos.Length > 0)
+                {
+                    // Se deu tudo certo, então retorna o valor
+                    if (retornoCorreios.Servicos[0].Erro == "0")
+                        lblFrete.Text = "Frete: R$" + retornoCorreios.Servicos[0].Valor.ToString();
+
+                }
+            }
+            else
+                lblerrofrete.Text = "*Por favor informe 8 dígitos ,somente números.";
+            
         }
 
 

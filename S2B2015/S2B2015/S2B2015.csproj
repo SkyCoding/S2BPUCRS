@@ -53,6 +53,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -220,6 +222,13 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Service References\Correios\CalcPrecoPrazo.disco" />
+    <None Include="Service References\Correios\configuration91.svcinfo" />
+    <None Include="Service References\Correios\configuration.svcinfo" />
+    <None Include="Service References\Correios\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Site.Master" />
     <Content Include="Vendas.aspx" />
     <Content Include="ViewSwitcher.ascx" />
@@ -230,6 +239,10 @@
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Site.Mobile.Master" />
+    <None Include="Service References\Correios\CalcPrecoPrazo.wsdl" />
+    <Content Include="Service References\Correios\S2B2015.Correios.cResultado.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -429,6 +442,11 @@
     <Compile Include="Responder.aspx.designer.cs">
       <DependentUpon>Responder.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Service References\Correios\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -480,6 +498,12 @@
     <EmbeddedResource Include="Migrations\201506111929440_avaliacao.resx">
       <DependentUpon>201506111929440_avaliacao.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\Correios\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -89,10 +89,18 @@ namespace S2B2015
             string strNomeUsuario = (from u in _db.Usuarios
                                     where u.UsuarioId == userid
                                     select u.strEmail).First();
-
-
-            lblResultadoUsuarios.Text = "Relatório do Usuário: " + strNomeUsuario+". Ofertou " + nOfertas + " itens, Vendeu "
-                + nVendidos + " itens, Realizou " + nPerguntas + " perguntas e respondeu a " + nRespostas + " perguntas.";
+            float nSomaOfertas=0;
+            foreach (var p in queryOfertas)
+                nSomaOfertas = nSomaOfertas + p.Preco;
+            float nSomaVendas = 0;
+            foreach (var p in queryOfertas.Where(p => p.nEstado == 2))
+                nSomaVendas = nSomaVendas + p.Preco;
+            double nTaxaVenda = ((double)nVendidos / (double)nOfertas) * 100;
+            lblResultadoUsuarios.Text = "Relatório do Usuário: " + strNomeUsuario + ". Ofertou " + nOfertas + " itens, Vendeu "
+                + nVendidos + " itens, Realizou " + nPerguntas + " perguntas e respondeu a " + nRespostas + " perguntas." +
+                "Taxa de produtos vendidos = " + String.Format("{0:0.00}",nTaxaVenda)+ "%."+
+                "Valor total total de todas suas ofertas: R$" + nSomaOfertas +". Valor total de suas vendas:R$"+nSomaVendas+".";
+                
 
             lnkItensOfertados.Text = "Vizualizar os " + nOfertas + " produtos oferecidos.";
             lnkVendidos.Text = "Vizualizar os " + nVendidos + " produtos vendidos.";
@@ -109,8 +117,8 @@ namespace S2B2015
                         select p;
             int nItens = query.Count();
             //int nItensblock = query.Where(p => p.bAtivada == false).Count();
-            int nBlockValidade =  query.Where(p => p.bAtivada == false && p.nEstado==1).Count();
-            int nblockVendedor = query.Where(p => p.bAtivada == false ).Count();
+            int nBlockValidade = query.ToList().Where(p => p.dtPublicação.AddDays(p.nValidade) < DateTime.Now).Count();
+            int nblockVendedor = query.Where(p => p.bAtivada == false && p.nEstado == 0).Count();
             int nVendidos = query.Where(p =>  p.nEstado == 2).Count();
             int nItensblock = nVendidos + nBlockValidade + nblockVendedor;
             lblRelatorioItem.Text= "Numero de itens anúnciados :" + nItens + ", numero de itens bloqueados:"+ nItensblock;

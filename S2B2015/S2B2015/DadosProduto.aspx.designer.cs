@@ -40,6 +40,42 @@ namespace S2B2015 {
         protected global::System.Web.UI.WebControls.Label lblPreco;
         
         /// <summary>
+        /// lblFrete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFrete;
+        
+        /// <summary>
+        /// lblerrofrete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblerrofrete;
+        
+        /// <summary>
+        /// txtCep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCep;
+        
+        /// <summary>
+        /// btncep control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btncep;
+        
+        /// <summary>
         /// btnComprar control.
         /// </summary>
         /// <remarks>

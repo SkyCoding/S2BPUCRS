@@ -226,4 +226,6 @@ C:\Users\Patrick\Documents\GitHub\S2BPUCRS\S2B2015\S2B2015\obj\Debug\S2B2015.Mig
 C:\Users\Patrick\Documents\GitHub\S2BPUCRS\S2B2015\S2B2015\obj\Debug\S2B2015.csproj.GenerateResource.Cache
 C:\Users\Patrick\Documents\GitHub\S2BPUCRS\S2B2015\S2B2015\obj\Debug\S2B2015.Migrations.compradordoproduto.resources
 C:\Users\Patrick\Documents\GitHub\S2BPUCRS\S2B2015\S2B2015\obj\Debug\S2B2015.Migrations.avaliacao.resources
+C:\Users\Felipe\Documents\GitHub\S2BPUCRS\S2B2015\S2B2015\obj\Debug\S2B2015.Migrations.compradordoproduto.resources
+C:\Users\Felipe\Documents\GitHub\S2BPUCRS\S2B2015\S2B2015\obj\Debug\S2B2015.Migrations.avaliacao.resources
 C:\Users\Patrick\Documents\GitHub\S2BPUCRS\S2B2015\S2B2015\obj\Debug\S2B2015.csprojResolveAssemblyReference.cache

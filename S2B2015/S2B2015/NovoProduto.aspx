@@ -56,8 +56,10 @@
                     </div>
 
                     <div class="col-md-4">
-                        <asp:Label ID="Label1" for="btnImage"  runat="server" Text="Pre-Visualizar"></asp:Label>
+                        <!--<asp:Label ID="Label1" for="btnImage"  runat="server" Text="Pre-Visualizar"></asp:Label>
+                        
                         <asp:Button ID="btnImage" CssClass="btn btn-primary" runat="server" Text="Imagem" OnClick="btnImage_Click" />
+                        -->
 
                         
                     </div>
@@ -76,8 +78,10 @@
 
             <div class="col-md-8">
                 <div >
+                    <!--
                     <asp:Image ID="imgProduto" CssClass="img-rounded img-responsive" runat="server" Height="400px" ImageUrl="http://www.gazette-ariegeoise.fr/IMG/jpg/test.jpg" Width="500px" />
-                </div>
+                     -->
+                     </div>
                 
             </div>
         

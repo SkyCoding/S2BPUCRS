@@ -38,15 +38,25 @@
         </div>
 
         <div class="col-md-8" >
-            <asp:Image ID="imgProduto" CssClass="img-rounded img-responsive" runat="server" Height="400px" ImageUrl="http://www.gazette-ariegeoise.fr/IMG/jpg/test.jpg" Width="500px" />
+            <asp:Image ID="imgProduto" CssClass="img-rounded img-responsive" runat="server" Height="500px" ImageUrl="https://www.upperty.com/images/misc/no-products-found.png" Width="500px" />
         </div>
 
-        <div class="col-md-4" >
+        <div class="col-md-4" 
+             
             <br />
             <div class="row">                           
-                <asp:Label ID="lblPreco" CssClass="h1" runat="server" Text="$$$"></asp:Label>                
-            </div>      
-                          
+                <asp:Label ID="lblPreco" CssClass="h1" runat="server" Text="$$$" ForeColor="Black"></asp:Label>
+                <br />
+                <asp:Label ID="lblFrete" CssClass="h1" runat="server" Text="Frete:" ForeColor="Black"></asp:Label>                
+                <asp:Label ID="lblerrofrete"  runat="server" Text="" ForeColor="Red"></asp:Label>                
+                <br />
+             </div>      
+                     
+            <div class="row">
+                <asp:TextBox ID="txtCep" CssClass="form-control" runat="server" Text="Digite seu CEP" Width="50%"> </asp:TextBox>  
+                <asp:Button ID="btncep" CssClass="btn  btn-default col-md-6" runat="server" Text="Calcular" OnClick="btncep_Click" Width="25%" />              
+             
+            </div>    
             <div class="row">
                 <asp:Button ID="btnComprar" CssClass="btn  btn-success col-md-6" runat="server" Text="COMPRAR" OnClick="btnComprar_Click" />                
             </div> 
@@ -61,7 +71,7 @@
                 <div runat="server" UpdateMode="Always" ChildrenAsTriggers="True">
                     <ContentTemplate>
                         <ul>
-                            <li> <asp:Label ID="lblRating" runat="server" Text="Avaliação do vendedor:"></asp:Label>
+                            <li> <asp:Label ID="lblRating" runat="server" Text="Avaliação do vendedor:" ForeColor="Black"></asp:Label>
                                 <br />           
 
                                                                     

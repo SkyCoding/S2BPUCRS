@@ -57,8 +57,9 @@
                         <li><a ID="btnAdmin" runat="server" href="~/Admin" visible="False">Home Admin</a></li>
                         <li><a ID="btnMinhasVendas" runat="server" href="~/Vendas?Usuario=" visible="False">Home - <span ID="notificacoes" runat="server" class="badge">0</span></a></li>
                         <li><a runat="server"><asp:TextBox ID="txtPesquisa" CssClass="form-control" placeholder="Search for..." runat="server"></asp:TextBox></a></li>
-                        <li><a runat="server"><asp:Button ID="btnPesquisar" CssClass="btn btn-default" runat="server" Text="Go!" OnClick="Pesquisar" /></a></li>
-                        <%--<li><div class="input-group">
+                       <!-- <li><a runat="server"><asp:Button ID="btnPesquisar" CssClass="btn btn-default" runat="server" Text="Go!" OnClick="Pesquisar" /></a></li> -->
+                        <li><a runat="server"><asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="http://www.clker.com/cliparts/a/r/8/G/y/x/search-icon-md.png" width="35" Height="35" OnClick="Pesquisar"/></a></li>
+                         <%--<li><div class="input-group"><asp:ImageButton runat="server"></asp:ImageButton>
                             <input type="text" class="form-control" placeholder="Search for...">
                             <span class="input-group-btn">
                             <button class="btn btn-default" type="button">Go!</button>
@@ -75,7 +76,7 @@
                         </AnonymousTemplate>
                         <LoggedInTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Hello, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li><a runat="server" href="~/Account/Manage" title="Manage your account">Bem Vindo, <%: Context.User.Identity.GetUserName()  %> !</a></li>
                                 
                                 <!--<li role="presentation"><a href="#">Messages <span class="badge">3</span></a></li>-->
                                 <li>

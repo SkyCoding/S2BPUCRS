@@ -1,11 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="BuscaProduto.aspx.cs" Inherits="S2B2015.WebForm2" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="panel">
-        <asp:Label CssClass="h2" ID="lblTitulo" runat="server" Text="Label"></asp:Label>
+        <asp:Label CssClass="h2" ID="lblTitulo" runat="server" Text=""></asp:Label>
         <br />
-        <asp:Label CssClass="h2" ID="lblNumeroResultados" runat="server" Text="Label"></asp:Label>
+        <asp:Label CssClass="h2" ID="lblNumeroResultados" runat="server" Text=""></asp:Label>
         <br />
-        <asp:Label CssClass="h2" ID="lblValores" runat="server" Text="Label"></asp:Label>
+        <asp:Label CssClass="h2" ID="lblValores" runat="server" Text=""></asp:Label>
     </div>
 
 
@@ -28,23 +28,42 @@
                         <div class="row">       
                             <div class="col-md-12">
                                 <asp:Label ID="lblNome" runat="server" Text="Nome"></asp:Label><br />
-                                <asp:TextBox CssClass="form-control" ID="txtNomeCategoria" runat="server" Width="100%"></asp:TextBox>
+                                <asp:TextBox CssClass="form-control" ID="txtNomeCategoria" runat="server" Width="60%"></asp:TextBox>
                                 <asp:Label ID="lblerrorname" runat="server" ForeColor="Red"></asp:Label>
                             </div>
                 
                             <div class="col-md-12">
                                 <asp:Label ID="lblDescrição" runat="server" Text="Descrição"></asp:Label><br />
-                                <asp:TextBox CssClass="form-control" ID="txtDescricaoCategoria" runat="server" Width="100%"></asp:TextBox>
+                                <asp:TextBox CssClass="form-control" ID="txtDescricaoCategoria" runat="server" Width="60%"></asp:TextBox>
                                 <asp:Label ID="lblerroDescr" runat="server" ForeColor="Red"></asp:Label>
                             </div>                
                         </div>            
-                    </div>
+                    <div class="col-md-12">
+                                <asp:Label ID="lblCategorias" runat="server" Text="Categorias"></asp:Label><br />
+                                <asp:DropDownList CssClass="form-control" ID="ListaCategorias" runat="server" >
+                                    <asp:ListItem>-----Categoria-----</asp:ListItem>
+                                </asp:DropDownList>
+                    </div> 
+                    <div class="col-md-12">
+                                <asp:Label ID="lblVendedor" runat="server" Text="Vendedor"></asp:Label><br />
+                                 <asp:DropDownList CssClass="form-control" ID="ListaUsuarios" runat="server" >
+                                    <asp:ListItem></asp:ListItem>
+                                </asp:DropDownList>
+                            </div>  
+                    <div class="col-md-12">  
+                        <br />
+                         <asp:Label ID="lblpreçoMin" runat="server" Width="60%" Text="Preço Minimo:"></asp:Label>
+                         <asp:TextBox  ID="txtMin" CssClass="form-control" runat="server" Width="10%"></asp:TextBox>
+                         <asp:Label  ID="lblpreçoMax" runat="server" Width="60%" Text="Preço Máximo:"></asp:Label>
+                         <asp:TextBox  ID="txtMax" CssClass="form-control" runat="server" Width="10%"></asp:TextBox>
+                        
+                    </div>  
+                        
+            </div>
                     <div class="col-md-4">      
                         <br />
-                        <asp:Button ID="btnPesquisar" Height="100px" Width="100%" CssClass="btn btn-success form-control" runat="server" Text="Pesquisar" />
+                        <asp:Button ID="btnPesquisar" Height="100px" Width="100%" CssClass="btn btn-success form-control" runat="server" Text="Pesquisar" OnClick="btnPesquisar_Click"/>
                     </div>
-
-            </div>
         </div>
         </div>
     </div>
@@ -94,9 +113,9 @@
                         <a href="BuscaProduto.aspx?Categoria=<%#:Item.CategoriaId%>"><%#: Item.oCategoria.strTitulo%></a>                       
                     </td>  
                     
-                    <td style="width:300px">
+                    <%--<td style="width:300px">
                         <a href="BuscaProduto.aspx?Categoria=<%#:Item.CategoriaId%>"><%#: Item.oCategoria.strTitulo%></a>                       
-                    </td>  
+                    </td>  --%>
                                      
                     <%--<td style="width:200px">
                         <%#: Item.nEstado%>

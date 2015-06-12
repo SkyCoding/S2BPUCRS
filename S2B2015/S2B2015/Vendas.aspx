@@ -242,7 +242,7 @@
                                     <EmptyDataTemplate>
                                         <table>
                                             <tr>
-                                                 <td>Você não possui nem um anuncio.</td> 
+                                                 <td>Você não possui nenhum anuncio.</td> 
                                             </tr>
                                         </table>
                                     </EmptyDataTemplate>
@@ -311,7 +311,7 @@
                                     <EmptyDataTemplate>
                                         <table>
                                             <tr>
-                                                 <td>Você ainda não respondeu nem uma pergunta</td> 
+                                                 <td>Você ainda não respondeu nenhuma pergunta</td> 
                                             </tr>
                                         </table>
                                     </EmptyDataTemplate>
@@ -387,7 +387,7 @@
                                     <EmptyDataTemplate>
                                         <table>
                                             <tr>
-                                                 <td>Você ainda não concretizou nem uma venda.</td> 
+                                                 <td>Você ainda não concretizou nenhuma venda.</td> 
                                             </tr>
                                         </table>
                                     </EmptyDataTemplate>
@@ -455,7 +455,7 @@
                                     <EmptyDataTemplate>
                                         <table>
                                             <tr>
-                                                 <td>Você ainda não concretizou nem uma venda.</td> 
+                                                 <td>Você ainda não cancelou nenhhum produto.</td> 
                                             </tr>
                                         </table>
                                     </EmptyDataTemplate>
@@ -513,7 +513,7 @@
             <div class="panel-heading" role="tab" id="heading4">
                 <h4 class="panel-title">
                 <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                    Suas perguntas em feitas
+                    Suas perguntas feitas
                 </a>
                 </h4>
             </div>
@@ -529,7 +529,7 @@
                                 <EmptyDataTemplate>
                                     <table>
                                         <tr>
-                                             <td>Você ainda não respondeu nem uma pergunta</td> 
+                                             <td>Você ainda não fez nenhuma pergunta</td> 
                                         </tr>
                                     </table>
                                 </EmptyDataTemplate>
@@ -610,7 +610,7 @@
                                     <EmptyDataTemplate>
                                         <table>
                                             <tr>
-                                                 <td>Você ainda não realizou nem uma compra.</td> 
+                                                 <td>Você ainda não realizou nenhuma compra.</td> 
                                             </tr>
                                         </table>
                                     </EmptyDataTemplate>
